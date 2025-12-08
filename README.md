@@ -1,0 +1,2 @@
+# coree
+core projects
