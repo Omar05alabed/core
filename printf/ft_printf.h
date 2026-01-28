@@ -23,6 +23,6 @@ int	ft_print_dec(int n);
 int	ft_print_unsigned(unsigned int n);
 int	ft_print_hex(unsigned int n, char format);
 int	ft_print_ptr(void *ptr);
-int     ft_printf(const char *format, ...);
+int	ft_printf(const char *format, ...);
 
 #endif

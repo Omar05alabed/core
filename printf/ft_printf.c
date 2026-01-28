@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-int	ft_handel_coversion(char specifier,va_list args)
+int	ft_handel_coversion(char specifier, va_list args)
 {
 	int	count;
 
@@ -20,7 +20,7 @@ int	ft_handel_coversion(char specifier,va_list args)
 	if (specifier == 'c')
 		count += ft_print_char(va_arg(args, int));
 	else if (specifier == 's')
-		count += ft_print_str(va_arg(args, char*));
+		count += ft_print_str(va_arg(args, char *));
 	else if (specifier == '%')
 		count += ft_print_percent();
 	else if (specifier == 'd' || specifier == 'i')
@@ -30,25 +30,25 @@ int	ft_handel_coversion(char specifier,va_list args)
 	else if (specifier == 'X' || specifier == 'x')
 		count += ft_print_hex(va_arg(args, unsigned int), specifier);
 	else if (specifier == 'p')
-		count += ft_print_ptr(va_arg(args, void*));
+		count += ft_print_ptr(va_arg(args, void *));
 	return (0);
 }
 
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
-	int	count;
-	int	i;
+	int		count;
+	int		i;
 
 	va_start(args, format);
 	count = 0;
 	i = 0;
-	while(format[i])
+	while (format[i])
 	{
-		if(format[i] == '%')
+		if (format[i] == '%')
 		{
-		i++;
-		count += ft_handel_coversion(format[i],args);
+			i++;
+			count += ft_handel_coversion(format[i], args);
 		}
 		else
 			count += ft_print_char(format[i]);
