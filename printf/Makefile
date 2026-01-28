@@ -6,11 +6,11 @@
 #    By: oalabed <omar.alabed@learner.42.tech>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/28 04:30:59 by oalabed           #+#    #+#              #
-#    Updated: 2026/01/28 04:44:01 by oalabed          ###   ########.fr        #
+#    Updated: 2026/01/28 16:40:28 by oalabed          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ft_printf.a
+NAME = libftprintf.a
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
