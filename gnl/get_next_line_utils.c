@@ -5,72 +5,88 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: oalabed <omar.alabed@learner.42.tech>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/03 23:18:12 by oalabed           #+#    #+#             */
-/*   Updated: 2026/02/03 23:21:27 by oalabed          ###   ########.fr       */
+/*   Created: 2026/02/19 03:01:00 by oalabed           #+#    #+#             */
+/*   Updated: 2026/02/19 03:03:49 by oalabed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "get_next_line.h"
-#include <stdio.h>
-#include <stdlib.h>
 
-int	ft_strchr(char *str)
+size_t	ft_strlen(char *s)
 {
-	int	i;
+	size_t	i;
 
-	i = 0;
-	if (!str)
+	if (!s)
 		return (0);
-	while (str[i])
-	{
-		if (str[i] == '\n')
-		{
-			return (1);
-		}
+	i = 0;
+	while (s[i])
 		i++;
-	}
-	return (0);
+	return (i);
 }
 
-int	ft_strlen(char *str)
+char	*ft_strchr(char *s, int c)
 {
 	int	i;
 
+	if (!s)
+		return (NULL);
 	i = 0;
-	if (!str)
-		return (0);
-	while (str[i])
+	while (s[i])
+	{
+		if (s[i] == (char)c)
+			return (&s[i]);
 		i++;
-	return (1);
+	}
+	if (c == '\0')
+		return (&s[i]);
+	return (NULL);
 }
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-	int		i;
-	int		j;
-	char	*result;
+	char	*res;
+	size_t	i;
+	size_t	j;
 
-	if (!s1)
-	{
-		s1 = malloc(1);
-		if (!s1)
-			return (NULL);
-		s1[0] = '\0';
-	}
-	if (!s2)
+	if (!s1 && !s2)
 		return (NULL);
-	result = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (!result)
+	res = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!res)
 		return (NULL);
 	i = 0;
-	while (s1[i])
+	while (s1 && s1[i])
 	{
-		result[i] = s1[i];
+		res[i] = s1[i];
 		i++;
 	}
 	j = 0;
-	while (s2[j])
-		result[i++] = s2[j++];
-	result[i] = '\0';
+	while (s2 && s2[j])
+		res[i++] = s2[j++];
+	res[i] = '\0';
 	free(s1);
-	return (result);
+	return (res);
+}
+
+char	*ft_substr(char *s, unsigned int start, size_t len)
+{
+	char	*res;
+	size_t	i;
+
+	if (!s)
+		return (NULL);
+	if (start >= ft_strlen(s))
+		return (malloc(1));
+	if (len > ft_strlen(s + start))
+		len = ft_strlen(s + start);
+	res = malloc(len + 1);
+	if (!res)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		res[i] = s[start + i];
+		i++;
+	}
+	res[i] = '\0';
+	return (res);
 }
