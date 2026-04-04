@@ -46,7 +46,7 @@ t_stack* init_stack(int argc, char** argv)
     i = 1;
     while (i < argc)
     {
-        value = ft_atoi(argv[i]); // make sure you validate before this
+        value = ft_atoi(argv[i]); 
         stack_add_back(&stack, stack_new(value));
         i++;
     }
