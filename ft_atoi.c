@@ -6,18 +6,19 @@
 /*   By: oalabed <oalabed@learner.42.tech>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 13:49:44 by oalabed           #+#    #+#             */
-/*   Updated: 2026/04/04 14:07:18 by oalabed          ###   ########.fr       */
+/*   Updated: 2026/04/06 12:45:35 by oalabed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "push_swap.h"
 
-int	ft_atoi(char *str)
+long	ft_atoi(char *str)
 {
 	int		i;
 	long	result;
 	int		sign;
 
 	i = 0;
-	resulte = 0;
+	result = 0;
 	sign = 1;
 	if (!str)
 		return (0);
@@ -29,7 +30,7 @@ int	ft_atoi(char *str)
 	}
 	while (str[i])
 	{
-		if (str[i] >= '0' || str[i] <= '9')
+		if (str[i] >= '0' && str[i] <= '9')
 			result = (result * 10) + (str[i] - '0');
 		else
 			print_error();

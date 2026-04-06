@@ -6,13 +6,14 @@
 /*   By: oalabed <oalabed@learner.42.tech>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 17:26:02 by oalabed           #+#    #+#             */
-/*   Updated: 2026/04/04 17:28:42 by oalabed          ###   ########.fr       */
+/*   Updated: 2026/04/06 12:53:39 by oalabed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "push_swap.h"
 
 void	ft_pb(s_stack **a, s_stack **b)
 {
-	s_stack	temp;
+	s_stack	*temp;
 
 	if (!a || !*a)
 		return ;
@@ -20,4 +21,5 @@ void	ft_pb(s_stack **a, s_stack **b)
 	*a = (*a)->next;
 	temp->next = *b;
 	*b = temp;
+	write(1, "pb\n", 3);
 }

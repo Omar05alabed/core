@@ -6,15 +6,16 @@
 /*   By: oalabed <oalabed@learner.42.tech>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 17:15:32 by oalabed           #+#    #+#             */
-/*   Updated: 2026/04/04 17:25:53 by oalabed          ###   ########.fr       */
+/*   Updated: 2026/04/06 12:48:40 by oalabed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "push_swap.h"
 
 void	ft_pa(s_stack **a, s_stack **b)
 {
 	s_stack	*temp;
 
-	if (!b, !*b)
+	if (!b || !*b)
 		return ;
 	temp = *b;
 	*b = (*b)->next;

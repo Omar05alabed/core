@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sb.c                                            :+:      :+:    :+:   */
+/*   ft_rrr.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oalabed <oalabed@learner.42.tech>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/04 17:02:17 by oalabed           #+#    #+#             */
-/*   Updated: 2026/04/06 13:05:50 by oalabed          ###   ########.fr       */
+/*   Created: 2026/04/06 13:59:57 by oalabed           #+#    #+#             */
+/*   Updated: 2026/04/06 14:02:53 by oalabed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "push_swap.h"
 
-void	ft_sb(s_stack **b)
+void	ft_rrr(s_stack **a, s_stack **b)
 {
-	s_stack	*first;
-	s_stack	*second;
-
-	if (!b || !*b || !(*b)->next)
-		return ;
-	first = *b;
-	second = (*b)->next;
-	first->next = second->next;
-	second->next = *b;
-	*b = second;
-	write(1, "sb\n", 3);
+	ft_rra(a);
+	ft_rrb(b);
 }

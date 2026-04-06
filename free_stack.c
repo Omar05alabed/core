@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sb.c                                            :+:      :+:    :+:   */
+/*   free_stack.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oalabed <oalabed@learner.42.tech>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/04 17:02:17 by oalabed           #+#    #+#             */
-/*   Updated: 2026/04/06 13:05:50 by oalabed          ###   ########.fr       */
+/*   Created: 2026/04/06 14:03:34 by oalabed           #+#    #+#             */
+/*   Updated: 2026/04/06 14:19:54 by oalabed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "push_swap.h"
 
-void	ft_sb(s_stack **b)
+void	free_stack(s_stack **a)
 {
-	s_stack	*first;
-	s_stack	*second;
+	s_stack	*temp;
 
-	if (!b || !*b || !(*b)->next)
-		return ;
-	first = *b;
-	second = (*b)->next;
-	first->next = second->next;
-	second->next = *b;
-	*b = second;
-	write(1, "sb\n", 3);
+	while (*a)
+	{
+		temp = *a;
+		*a = (*a)->next;
+		free(temp);
+	}
 }

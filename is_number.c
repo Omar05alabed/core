@@ -6,9 +6,10 @@
 /*   By: oalabed <oalabed@learner.42.tech>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 14:14:29 by oalabed           #+#    #+#             */
-/*   Updated: 2026/04/04 14:21:00 by oalabed          ###   ########.fr       */
+/*   Updated: 2026/04/06 13:06:54 by oalabed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "push_swap.h"
 
 int	is_number(char *str)
 {
@@ -23,7 +24,7 @@ int	is_number(char *str)
 		print_error();
 	while (str[i])
 	{
-		if (str[i] < 0 || str[i] > 9)
+		if (str[i] < '0' || str[i] > '9')
 			print_error();
 		i++;
 	}

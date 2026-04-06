@@ -6,9 +6,11 @@
 /*   By: oalabed <oalabed@learner.42.tech>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 14:05:15 by oalabed           #+#    #+#             */
-/*   Updated: 2026/04/04 14:07:03 by oalabed          ###   ########.fr       */
+/*   Updated: 2026/04/06 13:07:38 by oalabed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "push_swap.h"
+
 void	print_error(void)
 {
 	write(2, "error\n", 6);

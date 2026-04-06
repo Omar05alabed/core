@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sb.c                                            :+:      :+:    :+:   */
+/*   assaign_index.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oalabed <oalabed@learner.42.tech>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/04 17:02:17 by oalabed           #+#    #+#             */
-/*   Updated: 2026/04/06 13:05:50 by oalabed          ###   ########.fr       */
+/*   Created: 2026/04/06 14:20:57 by oalabed           #+#    #+#             */
+/*   Updated: 2026/04/06 14:35:05 by oalabed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "push_swap.h"
 
-void	ft_sb(s_stack **b)
+void	assign_index(s_stack **a)
 {
-	s_stack	*first;
-	s_stack	*second;
+	s_stack	*current;
+	s_stack	*compare;
+	int		index;
 
-	if (!b || !*b || !(*b)->next)
-		return ;
-	first = *b;
-	second = (*b)->next;
-	first->next = second->next;
-	second->next = *b;
-	*b = second;
-	write(1, "sb\n", 3);
+	current = *a;
+	while (current)
+	{
+		index = 0;
+		compare = *a;
+		while (compare)
+		{
+			if (compare->value < current->value)
+				index++;
+			compare = compare->next;
+		}
+		current->index = index;
+		current = current->next;
+	}
 }

@@ -6,19 +6,24 @@
 /*   By: oalabed <oalabed@learner.42.tech>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 17:46:19 by oalabed           #+#    #+#             */
-/*   Updated: 2026/04/04 17:54:36 by oalabed          ###   ########.fr       */
+/*   Updated: 2026/04/06 13:02:08 by oalabed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "push_swap.h"
 
-void	ft_rb(s_stack **b)
+void	ft_rb(t_stack **b)
 {
-	s_stack	i;
+	t_stack	*first;
+	t_stack	*last;
 
-	if (!a || !*a || !(*a)->next)
+	if (!b || !*b || !(*b)->next)
 		return ;
-	while (i->next != '\0')
-		i = i->next;
-	i->next = *a;
-	*a = *a->next;
-	i->next->next = NULL;
+	first = *b;
+	last = *b;
+	while (last->next != NULL)
+		last = last->next;
+	*b = first->next;
+	first->next = NULL;
+	last->next = first;
+	write(1, "rb\n", 3);
 }

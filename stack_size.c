@@ -6,9 +6,10 @@
 /*   By: oalabed <oalabed@learner.42.tech>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 15:06:26 by oalabed           #+#    #+#             */
-/*   Updated: 2026/04/04 15:11:08 by oalabed          ###   ########.fr       */
+/*   Updated: 2026/04/06 13:11:07 by oalabed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "push_swap.h"
 
 int	stack_size(t_stack *a)
 {
