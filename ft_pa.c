@@ -21,4 +21,5 @@ void	ft_pa(s_stack **a, s_stack **b)
 	*b = (*b)->next;
 	temp->next = *a;
 	*a = temp;
+	write(1, "pa\n", 3);
 }
