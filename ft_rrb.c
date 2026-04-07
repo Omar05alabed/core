@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "push_swap.h"
 
-void	ft_rra(s_stack **b)
+void	ft_rrb(s_stack **b)
 {
 	s_stack	*last;
 	s_stack	*second_last;
