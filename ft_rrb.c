@@ -6,15 +6,15 @@
 /*   By: oalabed <oalabed@learner.42.tech>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:58:13 by oalabed           #+#    #+#             */
-/*   Updated: 2026/04/06 14:02:38 by oalabed          ###   ########.fr       */
+/*   Updated: 2026/04/08 15:44:37 by oalabed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "push_swap.h"
 
-void	ft_rrb(s_stack **b)
+void	ft_rrb(t_stack **b, t_bench *bench)
 {
-	s_stack	*last;
-	s_stack	*second_last;
+	t_stack	*last;
+	t_stack	*second_last;
 
 	if (!b || !*b || !(*b)->next)
 		return ;
@@ -26,4 +26,9 @@ void	ft_rrb(s_stack **b)
 	*b = last;
 	second_last->next = NULL;
 	write(1, "rrb\n", 4);
+	if (bench)
+	{
+		bench->total_obs++;
+		bench->rrb++;
+	}
 }

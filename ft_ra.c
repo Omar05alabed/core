@@ -6,12 +6,12 @@
 /*   By: oalabed <oalabed@learner.42.tech>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 17:30:20 by oalabed           #+#    #+#             */
-/*   Updated: 2026/04/06 13:00:27 by oalabed          ###   ########.fr       */
+/*   Updated: 2026/04/08 15:57:59 by oalabed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "push_swap.h"
 
-void	ft_ra(t_stack **a)
+void	ft_ra(t_stack **a, t_bench *bench)
 {
 	t_stack	*first;
 	t_stack	*last;
@@ -26,4 +26,9 @@ void	ft_ra(t_stack **a)
 	first->next = NULL;
 	last->next = first;
 	write(1, "ra\n", 3);
+	if (bench)
+	{
+		bench->total_obs++;
+		bench->ra++;
+	}
 }

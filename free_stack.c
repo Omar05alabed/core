@@ -6,15 +6,15 @@
 /*   By: oalabed <oalabed@learner.42.tech>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 14:03:34 by oalabed           #+#    #+#             */
-/*   Updated: 2026/04/06 14:19:54 by oalabed          ###   ########.fr       */
+/*   Updated: 2026/04/08 15:32:20 by oalabed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	free_stack(s_stack **a)
+void	free_stack(t_stack **a)
 {
-	s_stack	*temp;
+	t_stack	*temp;
 
 	while (*a)
 	{

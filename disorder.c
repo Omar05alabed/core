@@ -1,30 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pb.c                                            :+:      :+:    :+:   */
+/*   disorder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oalabed <oalabed@learner.42.tech>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/04 17:26:02 by oalabed           #+#    #+#             */
-/*   Updated: 2026/04/08 15:44:01 by oalabed          ###   ########.fr       */
+/*   Created: 2026/04/08 14:09:58 by oalabed           #+#    #+#             */
+/*   Updated: 2026/04/08 15:56:01 by oalabed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "push_swap.h"
 
-void	ft_pb(t_stack **a, t_stack **b, t_bench *bench)
+double	compute_disorder(t_stack *a)
 {
-	t_stack	*temp;
+	t_stack	*i;
+	t_stack	*j;
+	int		mistake;
+	int		total;
 
-	if (!a || !*a)
-		return ;
-	temp = *a;
-	*a = (*a)->next;
-	temp->next = *b;
-	*b = temp;
-	write(1, "pb\n", 3);
-	if (bench)
+	i = a;
+	mistake = 0;
+	total = 0;
+	while (i->next != NULL)
 	{
-		bench->total_obs++;
-		bench->pb++;
+		j = i->next;
+		while (j != NULL)
+		{
+			total = total + 1;
+			if (i->value > j->value)
+				mistake++;
+			j = j->next;
+		}
+		i = i->next;
 	}
+	if (total == 0)
+		return (0);
+	return ((double)mistake / total);
 }

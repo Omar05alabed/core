@@ -6,13 +6,13 @@
 /*   By: oalabed <oalabed@learner.42.tech>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 14:43:17 by oalabed           #+#    #+#             */
-/*   Updated: 2026/04/06 15:17:21 by oalabed          ###   ########.fr       */
+/*   Updated: 2026/04/08 15:55:18 by oalabed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	get_min_pos(s_stack *stack)
+static int	get_min_pos(t_stack *stack)
 {
 	int	min;
 	int	pos;
@@ -34,7 +34,7 @@ static int	get_min_pos(s_stack *stack)
 	return (pos);
 }
 
-void	simple_sort(s_stack **a, s_stack **b)
+void	simple_sort(t_stack **a, t_stack **b, t_bench *bench)
 {
 	int	size;
 	int	pos;
@@ -47,18 +47,18 @@ void	simple_sort(s_stack **a, s_stack **b)
 		{
 			while (pos > 0)
 			{
-				ft_ra(a);
+				ft_ra(a, bench);
 				pos--;
 			}
 		}
 		else
 		{
 			while (pos++ < size)
-				ft_rra(a);
+				ft_rra(a, bench);
 		}
-		ft_pb(a, b);
+		ft_pb(a, b, bench);
 		size--;
 	}
 	while (*b)
-		ft_pa(a, b);
+		ft_pa(a, b, bench);
 }

@@ -6,14 +6,14 @@
 /*   By: oalabed <oalabed@learner.42.tech>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 17:15:32 by oalabed           #+#    #+#             */
-/*   Updated: 2026/04/06 12:48:40 by oalabed          ###   ########.fr       */
+/*   Updated: 2026/04/08 15:37:44 by oalabed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "push_swap.h"
 
-void	ft_pa(s_stack **a, s_stack **b)
+void	ft_pa(t_stack **a, t_stack **b, t_bench *bench)
 {
-	s_stack	*temp;
+	t_stack	*temp;
 
 	if (!b || !*b)
 		return ;
@@ -22,4 +22,9 @@ void	ft_pa(s_stack **a, s_stack **b)
 	temp->next = *a;
 	*a = temp;
 	write(1, "pa\n", 3);
+	if (bench)
+	{
+		bench->total_obs++;
+		bench->pa++;
+	}
 }

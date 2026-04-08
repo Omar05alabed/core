@@ -6,14 +6,14 @@
 /*   By: oalabed <oalabed@learner.42.tech>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 15:11:56 by oalabed           #+#    #+#             */
-/*   Updated: 2026/04/06 13:10:34 by oalabed          ###   ########.fr       */
+/*   Updated: 2026/04/08 15:59:55 by oalabed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "push_swap.h"
 
-s_stack	*stack_init(int *arr, int size)
+t_stack	*stack_init(int *arr, int size)
 {
-	s_stack	*stack;
+	t_stack	*stack;
 	int		z;
 
 	stack = NULL;

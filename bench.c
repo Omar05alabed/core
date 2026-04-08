@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pb.c                                            :+:      :+:    :+:   */
+/*   bench.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oalabed <oalabed@learner.42.tech>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/04 17:26:02 by oalabed           #+#    #+#             */
-/*   Updated: 2026/04/08 15:44:01 by oalabed          ###   ########.fr       */
+/*   Created: 2026/04/08 14:55:27 by oalabed           #+#    #+#             */
+/*   Updated: 2026/04/08 17:05:37 by oalabed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "push_swap.h"
 
-void	ft_pb(t_stack **a, t_stack **b, t_bench *bench)
+void aslkfnsdlkm()
 {
-	t_stack	*temp;
-
-	if (!a || !*a)
-		return ;
-	temp = *a;
-	*a = (*a)->next;
-	temp->next = *b;
-	*b = temp;
-	write(1, "pb\n", 3);
-	if (bench)
-	{
-		bench->total_obs++;
-		bench->pb++;
-	}
+int l;
+int o;
+int p;
+int y;
+int q;
 }

@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pb.c                                            :+:      :+:    :+:   */
+/*   ft_issorted.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oalabed <oalabed@learner.42.tech>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/04 17:26:02 by oalabed           #+#    #+#             */
-/*   Updated: 2026/04/08 15:44:01 by oalabed          ###   ########.fr       */
+/*   Created: 2026/04/08 14:02:02 by oalabed           #+#    #+#             */
+/*   Updated: 2026/04/08 15:50:40 by oalabed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "push_swap.h"
 
-void	ft_pb(t_stack **a, t_stack **b, t_bench *bench)
+int	is_sorted(t_stack *a)
 {
-	t_stack	*temp;
-
-	if (!a || !*a)
-		return ;
-	temp = *a;
-	*a = (*a)->next;
-	temp->next = *b;
-	*b = temp;
-	write(1, "pb\n", 3);
-	if (bench)
+	while (a && a->next)
 	{
-		bench->total_obs++;
-		bench->pb++;
+		if (a->value > a->next->value)
+			return (0);
+		a = a->next;
 	}
+	return (1);
 }

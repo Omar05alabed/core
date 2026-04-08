@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pb.c                                            :+:      :+:    :+:   */
+/*   bench_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oalabed <oalabed@learner.42.tech>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/04 17:26:02 by oalabed           #+#    #+#             */
-/*   Updated: 2026/04/08 15:44:01 by oalabed          ###   ########.fr       */
+/*   Created: 2026/04/08 16:10:59 by oalabed           #+#    #+#             */
+/*   Updated: 2026/04/08 16:14:50 by oalabed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "push_swap.h"
 
-void	ft_pb(t_stack **a, t_stack **b, t_bench *bench)
+void	bench_init(t_bench bench)
 {
-	t_stack	*temp;
-
-	if (!a || !*a)
-		return ;
-	temp = *a;
-	*a = (*a)->next;
-	temp->next = *b;
-	*b = temp;
-	write(1, "pb\n", 3);
-	if (bench)
-	{
-		bench->total_obs++;
-		bench->pb++;
-	}
+	bench->pa = 0;
+	bench->pb = 0;
+	bench->ra = 0;
+	bench->rb = 0;
+	bench->rr = 0;
+	bench->sa = 0;
+	bench->sb = 0;
+	bench->ss = 0;
+	bench->rra = 0;
+	bench->rrb = 0;
+	bench->rrr = 0;
+	bench->total_obs = 0;
 }

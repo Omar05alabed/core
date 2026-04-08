@@ -1,30 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pb.c                                            :+:      :+:    :+:   */
+/*   radix_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oalabed <oalabed@learner.42.tech>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/04 17:26:02 by oalabed           #+#    #+#             */
-/*   Updated: 2026/04/08 15:44:01 by oalabed          ###   ########.fr       */
+/*   Created: 2026/04/08 13:57:18 by oalabed           #+#    #+#             */
+/*   Updated: 2026/04/08 15:50:11 by oalabed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "push_swap.h"
 
-void	ft_pb(t_stack **a, t_stack **b, t_bench *bench)
+void	radix_sort(t_stack **a, t_stack **b, t_bench *bench)
 {
-	t_stack	*temp;
+	int	i;
+	int	size;
+	int	j;
+	int	max_bits;
 
-	if (!a || !*a)
-		return ;
-	temp = *a;
-	*a = (*a)->next;
-	temp->next = *b;
-	*b = temp;
-	write(1, "pb\n", 3);
-	if (bench)
+	size = stack_size(*a);
+	i = 0;
+	max_bits = 0;
+	while ((size >> max_bits) != 0)
+		max_bits++;
+	while (i < max_bits)
 	{
-		bench->total_obs++;
-		bench->pb++;
+		j = 0;
+		while (j < size)
+		{
+			if (((*a)->index >> i) & 1)
+				ft_ra(a, bench);
+			else
+				ft_pb(a, b, bench);
+			j++;
+		}
+		while (*b != NULL)
+			ft_pa(a, b, bench);
+		i++;
 	}
 }

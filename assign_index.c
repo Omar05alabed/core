@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   assaign_index.c                                    :+:      :+:    :+:   */
+/*   assign_index.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oalabed <oalabed@learner.42.tech>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 14:20:57 by oalabed           #+#    #+#             */
-/*   Updated: 2026/04/06 14:35:05 by oalabed          ###   ########.fr       */
+/*   Updated: 2026/04/08 15:40:15 by oalabed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	assign_index(s_stack **a)
+void	assign_index(t_stack **a)
 {
-	s_stack	*current;
-	s_stack	*compare;
+	t_stack	*current;
+	t_stack	*compare;
 	int		index;
 
 	current = *a;

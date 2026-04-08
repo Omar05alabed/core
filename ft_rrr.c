@@ -6,14 +6,19 @@
 /*   By: oalabed <oalabed@learner.42.tech>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:59:57 by oalabed           #+#    #+#             */
-/*   Updated: 2026/04/06 14:02:53 by oalabed          ###   ########.fr       */
+/*   Updated: 2026/04/08 15:59:11 by oalabed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_rrr(s_stack **a, s_stack **b)
+void	ft_rrr(t_stack **a, t_stack **b, t_bench *bench)
 {
-	ft_rra(a);
-	ft_rrb(b);
+	ft_rra(a, bench);
+	ft_rrb(b, bench);
+	if (bench)
+	{
+		bench->total_obs++;
+		bench->rrr++;
+	}
 }

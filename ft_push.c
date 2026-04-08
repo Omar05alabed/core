@@ -6,14 +6,14 @@
 /*   By: oalabed <oalabed@learner.42.tech>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 15:24:30 by oalabed           #+#    #+#             */
-/*   Updated: 2026/04/06 12:55:05 by oalabed          ###   ########.fr       */
+/*   Updated: 2026/04/08 15:50:58 by oalabed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "push_swap.h"
 
-int	ft_push(s_stack **a, int value)
+int	ft_push(t_stack **a, int value)
 {
-	s_stack	*node;
+	t_stack	*node;
 
 	node = ft_new_node(value);
 	if (node == NULL)
