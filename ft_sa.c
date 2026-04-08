@@ -21,7 +21,7 @@ void	ft_sa(s_stack **a)
 	first = *a;
 	second = (*a)->next;
 	first->next = second->next;
-	seconde->next = *a;
+	second->next = *a;
 	*a = second;
 	write(1, "sa\n", 3);
 }
