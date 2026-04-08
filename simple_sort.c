@@ -39,7 +39,7 @@ void	simple_sort(s_stack **a, s_stack **b)
 	int	size;
 	int	pos;
 
-	size = stack_size(a);
+	size = stack_size(*a);
 	while (size > 0)
 	{
 		pos = get_min_pos(*a);
