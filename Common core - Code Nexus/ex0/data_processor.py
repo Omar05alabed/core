@@ -67,96 +67,100 @@ class TextProcessor(DataProcessor):
 
 class LogProcessor(DataProcessor):
     def validate(self, data: Any) -> bool:
-        def valid_log(log: Any) -> bool:
+        if isinstance(data, dict):
             return (
-                isinstance(log, dict)
-                and all(isinstance(k, str) for k in log.keys())
-                and all(isinstance(v, str) for v in log.values())
+                all(isinstance(k, str) for k in data.keys())
+                and all(isinstance(v, str) for v in data.values())
             )
 
-        if valid_log(data):
-            return True
-
         if isinstance(data, list):
-            return all(valid_log(item) for item in data)
+            return all(
+                isinstance(item, dict)
+                and all(isinstance(k, str) for k in item.keys())
+                and all(isinstance(v, str) for v in item.values())
+                for item in data
+            )
 
         return False
 
     def ingest(
         self,
-        data: dict[str, str] | list[dict[str, str]],
+        data: dict[str, str] | list[dict[str, str]]
     ) -> None:
         if not self.validate(data):
-            raise ValueError("Improper log data")
+            raise ValueError("Invalid log data")
 
-        def format_log(log: dict[str, str]) -> str:
-            level = log.get("log_level", "")
-            message = log.get("log_message", "")
-            return f"{level}: {message}"
-
-        if isinstance(data, list):
-            for item in data:
-                self.result.append((self.rank, format_log(item)))
-                self.rank += 1
-        else:
-            self.result.append((self.rank, format_log(data)))
+        if isinstance(data, dict):
+            get_line = f"{data['log_level']}: {data['log_message']}"
+            self.result.append((self.rank, get_line))
             self.rank += 1
+
+        else:
+            for item in data:
+                get_line = f"{item['log_level']}: {item['log_message']}"
+                self.result.append((self.rank, get_line))
+                self.rank += 1
 
 
 def main() -> None:
-    print("=== Code Nexus - Data Processor ===")
-
-    numeric = NumericProcessor()
+    num = NumericProcessor()
     text = TextProcessor()
     log = LogProcessor()
 
-    print("\nTesting Numeric Processor...")
-    print(f"Trying to validate input '42': {numeric.validate(42)}")
-    print(f"Trying to validate input 'Hello': {numeric.validate('Hello')}")
+    print(num.validate(0))
+    print(num.validate("s"))
 
-    print("Test invalid ingestion of string 'foo' without prior validation:")
+    print(text.validate("s"))
+    print(text.validate(0))
+
+    print(log.validate("s"))
+    print(log.validate({"s": "s"}))
+
     try:
-        numeric.ingest("foo")  # type: ignore[arg-type]
+        num.ingest("s")
+
     except Exception as e:
-        print(f"Got exception: {e}")
+        print(e)
 
-    print("Processing data: [1, 2, 3, 4, 5]")
-    numeric.ingest([1, 2, 3, 4, 5])
+    try:
+        text.ingest(0)
 
-    print("Extracting 3 values...")
-    for _ in range(3):
-        rank, value = numeric.output()
-        print(f"Numeric value {rank}: {value}")
+    except Exception as e:
+        print(e)
 
-    print("\nTesting Text Processor...")
-    print(f"Trying to validate input '42': {text.validate(42)}")
+    try:
+        log.ingest("s")
 
-    text.ingest(["Hello", "Nexus", "World"])
+    except Exception as e:
+        print(e)
 
-    print("Extracting 1 value...")
-    rank, value = text.output()
-    print(f"Text value {rank}: {value}")
+    num.ingest(4)
+    num.ingest([20, 30, 40])
 
-    print("\nTesting Log Processor...")
-    print(f"Trying to validate input 'Hello': {log.validate('Hello')}")
+    while True:
+        try:
+            print(num.output())
+        except IndexError:
+            break
 
-    logs = [
-        {
-            "log_level": "NOTICE",
-            "log_message": "Connection to server",
-        },
-        {
-            "log_level": "ERROR",
-            "log_message": "Unauthorized access!!",
-        },
-    ]
+    text.ingest("O")
+    text.ingest(["m", "a", "r"])
 
-    log.ingest(logs)
+    while True:
+        try:
+            print(text.output())
+        except IndexError:
+            break
 
-    print("Extracting 2 values...")
-    for _ in range(2):
-        rank, value = log.output()
-        print(f"Log entry {rank}: {value}")
+    log.ingest({"log_level": "Omar", "log_message": "Al_abed"})
+    log.ingest([{"log_level": "O", "log_message": "m"},
+                {"log_level": "a", "log_message": "r"}])
+
+    while True:
+        try:
+            print(log.output())
+        except IndexError:
+            break
 
 
 if __name__ == "__main__":

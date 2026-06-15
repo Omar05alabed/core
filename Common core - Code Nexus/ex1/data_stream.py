@@ -49,16 +49,13 @@ class TextProcessor(DataProcessor):
     def validate(self, data: Any) -> bool:
         if isinstance(data, str):
             return True
-
         if isinstance(data, list):
             return all(isinstance(item, str) for item in data)
-
         return False
 
     def ingest(self, data: str | list[str]) -> None:
         if not self.validate(data):
             raise ValueError("Improper text data")
-
         if isinstance(data, list):
             for item in data:
                 self.result.append((self.rank, item))
@@ -70,40 +67,39 @@ class TextProcessor(DataProcessor):
 
 class LogProcessor(DataProcessor):
     def validate(self, data: Any) -> bool:
-        def valid_log(log: Any) -> bool:
+        if isinstance(data, dict):
             return (
-                isinstance(log, dict)
-                and all(isinstance(k, str) for k in log.keys())
-                and all(isinstance(v, str) for v in log.values())
+                all(isinstance(k, str) for k in data.keys())
+                and all(isinstance(v, str) for v in data.values())
             )
 
-        if valid_log(data):
-            return True
-
         if isinstance(data, list):
-            return all(valid_log(item) for item in data)
+            return all(
+                isinstance(item, dict)
+                and all(isinstance(k, str) for k in item.keys())
+                and all(isinstance(v, str) for v in item.values())
+                for item in data
+            )
 
         return False
 
     def ingest(
         self,
-        data: dict[str, str] | list[dict[str, str]],
+        data: dict[str, str] | list[dict[str, str]]
     ) -> None:
         if not self.validate(data):
-            raise ValueError("Improper log data")
+            raise ValueError("Invalid log data")
 
-        def format_log(log: dict[str, str]) -> str:
-            level = log.get("log_level", "")
-            message = log.get("log_message", "")
-            return f"{level}: {message}"
-
-        if isinstance(data, list):
-            for item in data:
-                self.result.append((self.rank, format_log(item)))
-                self.rank += 1
-        else:
-            self.result.append((self.rank, format_log(data)))
+        if isinstance(data, dict):
+            get_line = f"{data['log_level']}: {data['log_message']}"
+            self.result.append((self.rank, get_line))
             self.rank += 1
+
+        else:
+            for item in data:
+                get_line = f"{item['log_level']}: {item['log_message']}"
+                self.result.append((self.rank, get_line))
+                self.rank += 1
 
 
 class DataStream:
@@ -139,67 +135,26 @@ class DataStream:
 
 
 def main() -> None:
-    print("=== Code Nexus - Data Stream ===")
+    r = DataStream()
+    r.register_processor(TextProcessor())
+    r.register_processor(LogProcessor())
+    r.register_processor(NumericProcessor())
 
-    print("Initialize Data Stream...")
-    ds = DataStream()
-
-    print("== DataStream statistics ==")
-    ds.print_processors_stats()
-
-    print("Registering Numeric Processor")
-    numeric = NumericProcessor()
-    ds.register_processor(numeric)
-
-    batch = [
-        "Hello world",
-        [3.14, -1, 2.71],
-        [
-            {
-                "log_level": "WARNING",
-                "log_message": "Telnet access! Use ssh instead",
-            },
-            {
-                "log_level": "INFO",
-                "log_message": "User wil is connected",
-            },
-        ],
+    data = [
+        "Omar al_abed",
+        ["Hello", "world"],
         42,
-        ["Hi", "five"],
+        [3.14, -1, 2.71],
+        {"log_level": "Omar", "log_message": "Al_abed"},
     ]
 
-    print(f"Send first batch of data on stream: {batch}")
-    ds.process_stream(batch)
+    r.process_stream(data)
+    r.print_processors_stats()
 
-    print("== DataStream statistics ==")
-    ds.print_processors_stats()
+    for proc in r.processors:
+        print(proc.output())
 
-    print("Registering other data processors")
-    text = TextProcessor()
-    logs = LogProcessor()
-
-    ds.register_processor(text)
-    ds.register_processor(logs)
-
-    print("Send the same batch again")
-    ds.process_stream(batch)
-
-    print("== DataStream statistics ==")
-    ds.print_processors_stats()
-
-    print("Consume some elements from the data processors: Numeric 3, Text 2,"
-          " Log 1")
-
-    for _ in range(3):
-        numeric.output()
-
-    for _ in range(2):
-        text.output()
-
-    logs.output()
-
-    print("== DataStream statistics ==")
-    ds.print_processors_stats()
+    r.print_processors_stats()
 
 
 if __name__ == "__main__":
