@@ -1,7 +1,8 @@
-from pydantic import BaseModel, Field, model_validator
+from pydantic import BaseModel, Field, model_validator, ValidationError
 from typing import Optional
 from datetime import datetime
 from enum import Enum
+from typing import Self
 
 
 class ContactType(str, Enum):
@@ -12,8 +13,8 @@ class ContactType(str, Enum):
 
 
 class AlienContact(BaseModel):
-    contact_id: str = FielEnumd(min_length=5, max_length=15)
-    timestamp: datetime = Field(...)
+    contact_id: str = Field(min_length=5, max_length=15)
+    timestamp: datetime
     location: str = Field(min_length=3, max_length=100)
     contact_type: ContactType
     signal_strength: float = Field(ge=0.0, le=10.0)
@@ -23,7 +24,7 @@ class AlienContact(BaseModel):
     is_verified: bool = False
 
     @model_validator(mode="after")
-    def validate_cotant(self):
+    def validate_contant(self) -> Self:
         if not self.contact_id.startswith("AC"):
             raise ValueError("Contact ID must start with AC")
         if self.contact_type == ContactType.PHYSICAL and not self.is_verified:
@@ -44,12 +45,12 @@ class AlienContact(BaseModel):
         return self
 
 
-def main():
+def main() -> None:
     aliencontact = AlienContact(
         contact_id="AC_2024_001",
         timestamp=datetime(2026, 7, 20, 1, 33),
         location="Area 51, Nevada",
-        contact_type="radio",
+        contact_type=ContactType.RADIO,
         signal_strength=8.5,
         duration_minutes=45,
         witness_count=5,
@@ -61,7 +62,7 @@ def main():
     print("Location:", aliencontact.location)
     print("Signal:", aliencontact.signal_strength, "/10")
     print("Duration:", aliencontact.duration_minutes, "minutes")
-    print("Witnesse:", aliencontact.witness_count)
+    print("Witnesses:", aliencontact.witness_count)
     print("Message:", aliencontact.message_received)
 
     try:
@@ -69,13 +70,13 @@ def main():
             contact_id="AC_001",
             timestamp=datetime.now(),
             location="Mars",
-            contact_type="telepathic",
+            contact_type=ContactType.TELEPATHIC,
             signal_strength=5.0,
             duration_minutes=20,
             witness_count=1
         )
 
-    except ValueError as e:
+    except ValidationError as e:
         print("======================================")
         print("Expected validation error:")
         print(e.errors()[0]["msg"])
