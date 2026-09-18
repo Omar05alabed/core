@@ -44,4 +44,14 @@ def maze():
             print("invalid height")
 
 
+    def is_inside(row: int, colm: int) -> bool:
+        return 0 <= row < height and 0 <= colm < width
+
+    if not is_inside(*start) or not is_inside(*end):
+        raise ValueError("start and end must be inside the grid")
+
+
+
+
+
 maze()
