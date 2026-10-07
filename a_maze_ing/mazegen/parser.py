@@ -1,6 +1,7 @@
 # this is only for testing
 import sys
 from typing import Any
+import os
 
 
 def perfect_parser(char: str) -> bool:
@@ -34,33 +35,50 @@ def entry_exit(c: str) -> tuple[int, int]:
 
 def parsing(file_path: str) -> dict[str, Any]:
     config: dict[str, Any] = {}
-
-    if len(sys.argv) != 2:
-        raise ValueError("Expected exactly one config file!")
+    # Print the size of terminal
+    term_size = os.get_terminal_size()
+    print(term_size)
+    # if len(sys.argv) != 2:
+    #    raise ValueError("Expected exactly one config file!")
 
     req = ["WIDTH", "HEIGHT", "ENTRY", "EXIT", "OUTPUT_FILE", "PERFECT"]
-    sed = None
+    sed = []
     try:
         with open(file_path, "r") as file:
             lines = file.read().splitlines()
-
+            print(lines)
         # Read the configuration
         for line in lines:
             line = line.strip()
-
+            print("l", line)
             if not line or line.startswith("#"):
                 continue
 
             if "=" not in line:
                 raise ValueError("Invalid config line!")
-
+            '''
+            l = []
+            for c in line:
+                if c == "=":
+                    l.append(c)
+                print("L=", l)
+            if len(l) != 2:
+                print("wrong foramt:"
+                      "every line shoul;d contain exactly one '='")
+                sys.exit()
+        '''
             key, val = line.split("=", 1)
 
             key = key.strip().upper()
             val = val.strip()
 
             if key not in req:
-                raise ValueError(f"Unknown key: {key}")
+                if key == "SEED":
+                    sed.append(key)
+                    config["SEED"] = key
+
+                else:
+                    raise ValueError(f"Unknown key: {key}")
             if sed == "SEED":
                 seed = int(val)
                 config[sed] = seed
@@ -76,7 +94,8 @@ def parsing(file_path: str) -> dict[str, Any]:
         # Check for missing keys
         for word in req:
             if word not in config:
-                raise ValueError(f"Missing mandatory configuration key:{word}")
+                raise ValueError("Missing mandatory configuration key:"
+                                 f" {word}")
 
         # Parse WIDTH and HEIGHT
         try:
@@ -90,6 +109,13 @@ def parsing(file_path: str) -> dict[str, Any]:
 
         width = config["WIDTH"]
         height = config["HEIGHT"]
+        term_wid, term_height = term_size
+        if width > term_wid:
+            print("invalid width to the current terminal size")
+            sys.exit()
+        if height > term_height:
+            print("invalid height to the current terminal size")
+            sys.exit()
 
         # Parse PERFECT
         config["PERFECT"] = perfect_parser(config["PERFECT"])
@@ -129,4 +155,11 @@ def parsing(file_path: str) -> dict[str, Any]:
         print(f"Configuration error: {e}")
         sys.exit(1)
 
+    if config["PERFECT"] and height == 2 and width == 2:
+        print("there are no possible maze with the height and a width of 2 to"
+              " be perfect")
+        sys.exit()
     return config
+
+
+parsing("config.txt")
