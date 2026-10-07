@@ -1,0 +1,10 @@
+# A-Maze-ing configuration file
+# One KEY = VALUE pair per line, lines starting with # are comments.
+
+WIDTH = 20
+HEIGHT = 20
+ENTRY = 0,0
+EXIT = 19,18
+OUTPUT_FILE = maze.txt
+PERFECT = false
+SEED = 42
